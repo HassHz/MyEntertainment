@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Avatar, Icon } from 'antd';
+import { List, Icon } from 'antd';
 
 const IconText = ({ type, text }) => (
   <span>
@@ -8,7 +8,11 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-const Movies = (props) => {
+const SearchResultsList = (props) => {
+    var movie_list = [];
+    if (props.movies.hasOwnProperty("search_results")) {
+        movie_list = props.movies.search_results.results;
+    }
     return (
         <List
             itemLayout="vertical"
@@ -19,7 +23,7 @@ const Movies = (props) => {
                 },
                 pageSize: 3,
             }}
-            dataSource={props.data}
+            dataSource={movie_list}
             renderItem={item => (
                 <List.Item
                     key={item.title}
@@ -27,15 +31,14 @@ const Movies = (props) => {
                     extra={<img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
                 >
                     <List.Item.Meta
-                        avatar={<Avatar src={item.avatar} />}
-                        title={<a href={`/mymovies/${item.id}`}>{item.title}</a>}
-                        description={item.url}
+                        title={item.title}
+                        description={item.overview}
                     />
-                    {item.content}
+                    {item.overview}
                 </List.Item>
             )}
         />
     );
 };
 
-export default Movies;
+export default SearchResultsList;

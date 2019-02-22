@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Applications
     'movies',
+    'search',
 
     # Tools
     'rest_framework',
